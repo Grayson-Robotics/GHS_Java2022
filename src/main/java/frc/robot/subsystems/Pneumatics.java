@@ -4,12 +4,24 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class Pneumatics extends SubsystemBase {
-  /** Creates a new Pneumatics. */
-  public Pneumatics() {}
+  
+  //Declare the solenoids for use in our subsystem.
+  private static final DoubleSolenoid solenoid1 = new DoubleSolenoid(Constants.solenoids.solenoid1, Constants.solenoids.solenoid2);
 
+  /** Creates a new Pneumatics. */
+  public Pneumatics() {
+    solenoid1.set(Value.kReverse);
+  }
+
+  public void toggleSolenoid(){
+    solenoid1.toggle();
+  }
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
