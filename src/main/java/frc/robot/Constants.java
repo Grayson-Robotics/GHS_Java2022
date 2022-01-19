@@ -24,6 +24,11 @@ public final class Constants {
         public static final int m_topRight = 2;
         public static final int m_bottomRight = 3;
     }
-
+    
+    // This holds what channel certain solenoids are on.
+    public final class solenoids{
+        public static final int solenoid1 = 0;
+        public static final int solenoid2 = 1;
+    }
     
 }
