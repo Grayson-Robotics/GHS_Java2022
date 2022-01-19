@@ -23,7 +23,8 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
  // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  private final Compressor compressor = new Compressor();
+  
+ private final Compressor compressor = new Compressor();
   private final DriveTrain driveTrain = new DriveTrain();
   final Joystick m_stick2 = new Joystick(0);
   final XboxController xbox = new XboxController(1);
@@ -80,8 +81,12 @@ public class RobotContainer {
     LT2.whenPressed(new PneumaticUp(m_PneumaticsSubsystem));
     LB2.whenPressed(new PneumaticDown(m_PneumaticsSubsystem));
     // Configure the button bindings*/
+    
+    compressor.start();
+    compressor.setClosedLoopControl(true);
+    
     configureButtonBindings();
-
+    
     driveTrain.setDefaultCommand(new driveCommand(driveTrain , () -> m_stick2.getY(), () -> m_stick2.getX()));
   }
 
