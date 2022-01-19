@@ -24,8 +24,9 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
  // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   
- private final Compressor compressor = new Compressor();
+  private final Compressor compressor = new Compressor();
   private final DriveTrain driveTrain = new DriveTrain();
+  
   final Joystick m_stick2 = new Joystick(0);
   final XboxController xbox = new XboxController(1);
 
@@ -84,7 +85,7 @@ public class RobotContainer {
     
     compressor.start();
     compressor.setClosedLoopControl(true);
-    
+
     configureButtonBindings();
     
     driveTrain.setDefaultCommand(new driveCommand(driveTrain , () -> m_stick2.getY(), () -> m_stick2.getX()));
