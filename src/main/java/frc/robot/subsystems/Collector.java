@@ -5,8 +5,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.VictorSP;
+import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 
 public class Collector extends SubsystemBase {
   private final VictorSP ballcollecter_motor = new VictorSP(19);

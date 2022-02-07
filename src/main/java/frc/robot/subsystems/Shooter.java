@@ -5,7 +5,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj.VictorSP;
+import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 
 public class Shooter extends SubsystemBase {
   private final VictorSP shooter_motor = new VictorSP(18);

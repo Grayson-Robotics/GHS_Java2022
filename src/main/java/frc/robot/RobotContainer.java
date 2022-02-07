@@ -23,7 +23,6 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
  // private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   
-  private final Compressor compressor = new Compressor();
   private final DriveTrain driveTrain = new DriveTrain();
   private final Pneumatics pneumatics = new Pneumatics();
 
@@ -85,8 +84,6 @@ public class RobotContainer {
     LB2.whenPressed(new PneumaticDown(m_PneumaticsSubsystem));
     // Configure the button bindings*/
     
-    compressor.start();
-    compressor.setClosedLoopControl(true);
 
     configureButtonBindings();
     
@@ -112,7 +109,7 @@ public class RobotContainer {
 
 
     X.whenHeld(new startCollect());
-    B.toggleWhenPressed(new toggleSolenoid(pneumatics, true));
+    B.toggleWhenPressed(new toggleSolenoid(pneumatics));
   }
   
   public DriveTrain getDriveTrain(){
