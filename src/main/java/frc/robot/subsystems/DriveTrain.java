@@ -28,7 +28,6 @@ private static final MotorControllerGroup m_rightMotorGroup = new MotorControlle
   /** Creates a new DriveTrain. */
   public DriveTrain() {
     m_robotDrive.setDeadband(0.1);
-    m_robotDrive.setRightSideInverted(true);
   }
   
   public void drive(double xSpeed, double zRotation){
