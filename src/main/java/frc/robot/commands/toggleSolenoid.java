@@ -11,12 +11,10 @@ public class toggleSolenoid extends CommandBase {
   /** Creates a new setReverse. */
 
   public Pneumatics pneumatics;
-  private boolean toggle;
 
-  public toggleSolenoid(Pneumatics pneumatics, boolean toggle) {
+  public toggleSolenoid(Pneumatics pneumatics) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.pneumatics = pneumatics;
-    this.toggle = toggle;
 
     addRequirements(pneumatics);
   }
