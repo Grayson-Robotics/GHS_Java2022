@@ -8,12 +8,15 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Pneumatics;
 
 public class toggleSolenoid extends CommandBase {
+  /** Creates a new setReverse. */
+
   public Pneumatics pneumatics;
-  
-  /** Creates a new toggleSolenoid. */
-  public toggleSolenoid(Pneumatics pneumatics) {
+  private boolean toggle;
+
+  public toggleSolenoid(Pneumatics pneumatics, boolean toggle) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.pneumatics = pneumatics;
+    this.toggle = toggle;
 
     addRequirements(pneumatics);
   }
@@ -25,12 +28,14 @@ public class toggleSolenoid extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    pneumatics.toggleSolenoid();
+    pneumatics.setForward();
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    pneumatics.setReverse();
+  }
 
   // Returns true when the command should end.
   @Override

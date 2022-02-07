@@ -22,6 +22,15 @@ public class Pneumatics extends SubsystemBase {
   public void toggleSolenoid(){
     solenoid1.toggle();
   }
+
+  public void setForward(){
+    solenoid1.set(Value.kForward);
+  }
+
+  public void setReverse(){
+    solenoid1.set(Value.kReverse);
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

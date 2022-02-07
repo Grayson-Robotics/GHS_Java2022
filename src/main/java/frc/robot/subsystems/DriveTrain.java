@@ -26,12 +26,23 @@ private static final SpeedControllerGroup m_rightMotorGroup = new SpeedControlle
  private final DifferentialDrive m_robotDrive = new DifferentialDrive(m_leftMotorGroup, m_rightMotorGroup);
 
   /** Creates a new DriveTrain. */
-  public DriveTrain() {}
+  public DriveTrain() {
+    
+    m_robotDrive.setDeadband(0.1);
+  }
   
   public void drive(double xSpeed, double zRotation){
     m_robotDrive.arcadeDrive(xSpeed, zRotation);
   }
-  
+
+  public double getPWMValueOfLeftGroup(){
+    return m_leftMotorGroup.get();
+  }
+
+  public double getPWMValueOfRightGroup(){
+    return m_rightMotorGroup.get();
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
