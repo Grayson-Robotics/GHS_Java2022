@@ -87,7 +87,7 @@ public class RobotContainer {
 
     configureButtonBindings();
     
-    driveTrain.setDefaultCommand(new driveCommand(driveTrain , () -> 0.75 * -(m_stick2.getY()), () -> 0.75 * (m_stick2.getRawAxis(2))));
+    driveTrain.setDefaultCommand(new driveCommand(driveTrain , () -> 0.75 * -(m_stick2.getY()), () -> 0.75 * (m_stick2.getRawAxis(4))));
   }
 
   /**
