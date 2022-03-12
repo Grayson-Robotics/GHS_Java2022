@@ -18,11 +18,11 @@ public final class Constants {
     
     //This sub-class holds the ports for any motors required to drive.
     public final class driveMotors{
-        public static final int m_topLeft = 0;
-        public static final int m_bottomLeft = 1;
+        public static final int m_topLeft = 5;
+        public static final int m_bottomLeft = 2;
     
-        public static final int m_topRight = 2;
-        public static final int m_bottomRight = 3;
+        public static final int m_topRight = 1;
+        public static final int m_bottomRight = 4;
     }
     
     // This holds what channel certain solenoids are on.
