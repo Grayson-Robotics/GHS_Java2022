@@ -25,6 +25,7 @@ public class RobotContainer {
   
   private final DriveTrain driveTrain = new DriveTrain();
   private final Pneumatics pneumatics = new Pneumatics();
+  private final Climber climber = new Climber();
 
   final Joystick m_stick2 = new Joystick(0);
   final XboxController xbox = new XboxController(1);
@@ -97,9 +98,9 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-     final JoystickButton A = new JoystickButton(m_stick2 , 2);
-     final JoystickButton B = new JoystickButton(m_stick2, 3);
-     final JoystickButton X = new JoystickButton(m_stick2, 1);
+     final JoystickButton A = new JoystickButton(m_stick2 , 1);
+     final JoystickButton B = new JoystickButton(m_stick2, 2);
+     final JoystickButton X = new JoystickButton(m_stick2, 3);
      final JoystickButton R2 = new JoystickButton(m_stick2, 8);
      final JoystickButton Y = new JoystickButton(m_stick2 ,4);
      //final JoystickButton LB = new JoystickButton(m_stick2, 5);
@@ -108,8 +109,10 @@ public class RobotContainer {
     
 
 
-    X.whenHeld(new startCollect());
+    
     B.toggleWhenPressed(new toggleSolenoid(pneumatics));
+    A.whenHeld(new sendClimbArmDown(climber));
+    X.whenHeld(new sendClimbArmUp(climber));
   }
   
   public DriveTrain getDriveTrain(){

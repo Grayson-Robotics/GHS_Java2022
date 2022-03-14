@@ -23,6 +23,7 @@ public final class Constants {
     
         public static final int m_topRight = 1;
         public static final int m_bottomRight = 4;
+        public static final int m_climber = 0;
     }
     
     // This holds what channel certain solenoids are on.
