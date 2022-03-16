@@ -10,8 +10,11 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.commands.*;
+import frc.robot.subclasses.JoystickAxis;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -26,9 +29,10 @@ public class RobotContainer {
   private final DriveTrain driveTrain = new DriveTrain();
   private final Pneumatics pneumatics = new Pneumatics();
   private final Climber climber = new Climber();
+  private final Shooter shooter = new Shooter();
 
-  final Joystick m_stick2 = new Joystick(0);
-  final XboxController xbox = new XboxController(1);
+  final Joystick m_stick = new Joystick(0);
+  final XboxController m_stick2 = new XboxController(1);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -52,10 +56,6 @@ public class RobotContainer {
     double sticky = 0.0;
     double stickz = 0.0;
 
-    bA = xbox.getAButton();
-    bY = xbox.getYButton();
-    bX = xbox.getXButton();
-    bB = xbox.getBButton();
     
      /*RB = xbox.getBumper();
     LB = xbox.getBumper();
@@ -88,7 +88,7 @@ public class RobotContainer {
 
     configureButtonBindings();
     
-    driveTrain.setDefaultCommand(new driveCommand(driveTrain , () -> 0.75 * -(m_stick2.getY()), () -> 0.75 * (m_stick2.getRawAxis(4))));
+    driveTrain.setDefaultCommand(new driveCommand(driveTrain , () -> 0.75 * -(m_stick.getY()), () -> 0.75 * (m_stick.getRawAxis(4))));
   }
 
   /**
@@ -98,21 +98,20 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-     final JoystickButton A = new JoystickButton(m_stick2 , 1);
-     final JoystickButton B = new JoystickButton(m_stick2, 2);
-     final JoystickButton X = new JoystickButton(m_stick2, 3);
-     final JoystickButton R2 = new JoystickButton(m_stick2, 8);
-     final JoystickButton Y = new JoystickButton(m_stick2 ,4);
-     //final JoystickButton LB = new JoystickButton(m_stick2, 5);
-     final JoystickButton LB2 = new JoystickButton(m_stick2, 5);
-     final JoystickButton LT2 = new JoystickButton(m_stick2, 7);
-    
+    final JoystickButton A = new JoystickButton(m_stick2 , 1);
+    final JoystickButton B = new JoystickButton(m_stick2, 2);
+    final JoystickButton X = new JoystickButton(m_stick2, 3);
+    final JoystickButton Y = new JoystickButton(m_stick2 ,4);
+    final JoystickAxis R2 = new JoystickAxis(m_stick2, 3);
+    final POVButton upAngle = new POVButton(m_stick2, 0); 
+    final POVButton downAngle = new POVButton(m_stick2, 180); 
 
-
-    
-    B.toggleWhenPressed(new toggleSolenoid(pneumatics));
+//If thy lay thyeth eyes on to code, thy must accept the grace ofeth truth. Thou haft no maidens, thou art maidenless.//
+ 
+    X.toggleWhenPressed(new toggleSolenoid(pneumatics));
     A.whenHeld(new sendClimbArmDown(climber));
-    X.whenHeld(new sendClimbArmUp(climber));
+    Y.whenHeld(new sendClimbArmUp(climber));
+    R2.whenHeld(new startShoot(shooter), true);
   }
   
   public DriveTrain getDriveTrain(){

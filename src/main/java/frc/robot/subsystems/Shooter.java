@@ -5,17 +5,22 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
+import frc.robot.Constants;
+
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 public class Shooter extends SubsystemBase {
-  private final VictorSP shooter_motor = new VictorSP(18);
+  private final WPI_VictorSPX shooter_motor = new WPI_VictorSPX(Constants.utilMotors.m_shooter);
   /** Creates a new Shooter. */
-  public Shooter() {}
+  public Shooter() {
+
+  }
+  public void set(double speed){
+    shooter_motor.set(speed);
+  }
 
   @Override
-  public void periodic() {
+  public void periodic() {  
 
-  //shooter_motor.set(bA);
-    // This method will be called once per scheduler run
   }
 }
