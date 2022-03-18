@@ -5,10 +5,13 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
+import frc.robot.Constants;
+
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+
 
 public class Collector extends SubsystemBase {
-  private final VictorSP ballcollecter_motor = new VictorSP(19);
+  private final WPI_VictorSPX ballcollecter_motor = new WPI_VictorSPX(Constants.utilMotors.m_grabber);
   /** Creates a new Collector. */
 
 

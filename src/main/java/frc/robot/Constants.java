@@ -27,7 +27,9 @@ public final class Constants {
     }
     public final class utilMotors{
         public static final int m_shooter = 3; 
-        public static final int m_elevator = 8;       
+        public static final int m_elevator = 8;   
+        public static final int m_arm = 7;
+        public static final int m_grabber = 6;
     }
 
     // This holds what channel certain solenoids are on.

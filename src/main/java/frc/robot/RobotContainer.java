@@ -30,6 +30,9 @@ public class RobotContainer {
   private final Pneumatics pneumatics = new Pneumatics();
   private final Climber climber = new Climber();
   private final Shooter shooter = new Shooter();
+  private final Elevator elevator = new Elevator();
+  private final ArmMove arm = new ArmMove();
+  private final Collector collect = new Collector();
 
   final Joystick m_stick = new Joystick(0);
   final XboxController m_stick2 = new XboxController(1);
@@ -88,7 +91,7 @@ public class RobotContainer {
 
     configureButtonBindings();
     
-    driveTrain.setDefaultCommand(new driveCommand(driveTrain , () -> 0.75 * -(m_stick.getY()), () -> 0.75 * (m_stick.getRawAxis(4))));
+    driveTrain.setDefaultCommand(new driveCommand(driveTrain , () ->  -(m_stick.getY()), () -> (m_stick.getRawAxis(4))));
   }
 
   /**
@@ -102,6 +105,9 @@ public class RobotContainer {
     final JoystickButton B = new JoystickButton(m_stick2, 2);
     final JoystickButton X = new JoystickButton(m_stick2, 3);
     final JoystickButton Y = new JoystickButton(m_stick2 ,4);
+    final JoystickButton L1 = new JoystickButton(m_stick2, 5);
+    final JoystickButton R1 = new JoystickButton(m_stick2, 6);
+    final JoystickAxis L2 = new JoystickAxis(m_stick2, 2);
     final JoystickAxis R2 = new JoystickAxis(m_stick2, 3);
     final POVButton upAngle = new POVButton(m_stick2, 0); 
     final POVButton downAngle = new POVButton(m_stick2, 180); 
@@ -111,7 +117,12 @@ public class RobotContainer {
     X.toggleWhenPressed(new toggleSolenoid(pneumatics));
     A.whenHeld(new sendClimbArmDown(climber));
     Y.whenHeld(new sendClimbArmUp(climber));
+    L1.whenHeld(new armUp(arm));
+    R1.whenHeld(new armDown(arm));
+    L2.whenHeld(new runGrabber(collect));
     R2.whenHeld(new startShoot(shooter), true);
+    upAngle.whenHeld(new elevatorUp(elevator));
+    downAngle.whenHeld(new elevatorDown(elevator));
   }
   
   public DriveTrain getDriveTrain(){
