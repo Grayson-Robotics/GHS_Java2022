@@ -4,20 +4,19 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Collector;
+import frc.robot.subsystems.DriveTrain;
 
-public class runGrabber extends CommandBase {
-  public Collector collector;
+public class driveAuto extends CommandBase {
+  public DriveTrain drive;
   
-  /** Creates a new runGrabber. */
-  public runGrabber(Collector collect) {
+  /** Creates a new driveAuto. */
+  public driveAuto(DriveTrain drive) {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.collector = collect;
 
-    addRequirements(collect);
+    this.drive = drive;
 
+    addRequirements(drive);
   }
 
   // Called when the command is initially scheduled.
@@ -27,13 +26,13 @@ public class runGrabber extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    collector.setSpeed(-0.45);
+    
   }
 
-  // Called once the command ends or is interrupted.
+  // Called once the comm                                                                                 //0/// / /00...0..0and ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    collector.setSpeed(0);
+    drive.drive(0, 0);
   }
 
   // Returns true when the command should end.
