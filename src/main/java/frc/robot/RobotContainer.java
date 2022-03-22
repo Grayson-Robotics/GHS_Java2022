@@ -4,9 +4,15 @@
 
 package frc.robot;
 
+import java.util.Map;
+
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Joystick;
@@ -35,6 +41,11 @@ public class RobotContainer {
   private final Elevator elevator = new Elevator();
   private final ArmMove arm = new ArmMove();
   private final Collector collect = new Collector();
+  
+  private ShuffleboardTab driveTab = Shuffleboard.getTab("drive");
+  private NetworkTableEntry maxSpeed = driveTab.add("Max Speed", 1).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1)).getEntry();
+  
+  private double speed = maxSpeed.getDouble(1.0);
 
   private SendableChooser<Command> choose = new SendableChooser<>();
   
@@ -55,13 +66,12 @@ public class RobotContainer {
 
     
     SmartDashboard.putBoolean("Compressor Running", compress.enabled());
-    
     SmartDashboard.putBoolean("2A", m_stick2.getAButtonPressed());
     
 
     configureButtonBindings();
     
-    driveTrain.setDefaultCommand(new driveCommand(driveTrain , () -> 0.85 * -(m_stick.getY()), () -> 0.85 *(m_stick.getRawAxis(4))));
+    driveTrain.setDefaultCommand(new driveCommand(driveTrain , () -> speed * -(m_stick.getY()), () -> speed *(m_stick.getRawAxis(4))));
   }
 
   /**
