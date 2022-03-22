@@ -7,8 +7,10 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import frc.robot.commands.*;
 import frc.robot.subclasses.JoystickAxis;
 import frc.robot.subsystems.*;
@@ -34,60 +36,28 @@ public class RobotContainer {
   private final Elevator elevator = new Elevator();
   private final ArmMove arm = new ArmMove();
   private final Collector collect = new Collector();
+
+  private SendableChooser<Command> choose = new SendableChooser<>();
   
+  private Compressor compress = new Compressor(PneumaticsModuleType.CTREPCM);
+
   final Joystick m_stick = new Joystick(0);
   final XboxController m_stick2 = new XboxController(1);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
 
-   // m_chooser.setDefaultBoolean()
-   // SmartDashboard.putData("auto modes", &m_chooser);
+    choose.setDefaultOption("autoOn", new driveAuto(driveTrain, shooter, elevator));
+    choose.addOption("autoOff", new dummyCommand());
+    
+    SmartDashboard.putData("auto modes", choose);
    //turn object buttons into boolean
-
-
-
    
-    boolean bB = false;
-    boolean bA = false;
-    boolean bY = false;
-    boolean bX = false;
-    boolean RB = false;
-    boolean LB = false;
-    boolean RT = false;
-    boolean LT = false;
-    double stickx = 0.0;
-    double sticky = 0.0;
-    double stickz = 0.0;
 
     
-     /*RB = xbox.getBumper();
-    LB = xbox.getBumper();
-    RT = xbox.getBumper();
-    LT = xbox.getBumper();*/
-    SmartDashboard.putBoolean("B", bB );
-    SmartDashboard.putBoolean("A", bA );
-    SmartDashboard.putBoolean("X", bX );
-
+    SmartDashboard.putBoolean("Compressor Running", compress.enabled());
     
-    /*SmartDashboard.putBoolean("Y", bY );
-    SmartDashboard.putNumber(key, value)
-    SmartDashboard.putNumber(key, value)
-    SmartDashboard.putNumber(key, value)*/
-
-
-
-   /* A.whenHeld(new Shooter(m_ShooterSubsystem, 1.0));
-    B.whenHeld(new Scooper(m_ScooperSubsystem, -1.0));
-    X.whenHeld(new shootscoop(m_ShooterSubsystem, m_ScooperSubsystem, -1.0, 0.5));
-    R2.whenHeld(new shootscoop(m_ShooterSubsystem, m_ScooperSubsystem, -1.0, 0.5));
-    LB.whenHeld(new TeleOpDrive(m_DriveSubsystem, 
-    () -> (0),
-    () -> (0)
-    ));
-    LT2.whenPressed(new PneumaticUp(m_PneumaticsSubsystem));
-    LB2.whenPressed(new PneumaticDown(m_PneumaticsSubsystem));
-    // Configure the button bindings*/
+    SmartDashboard.putBoolean("2A", m_stick2.getAButtonPressed());
     
 
     configureButtonBindings();
@@ -138,7 +108,7 @@ public class RobotContainer {
    
    public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return new driveAuto(driveTrain, shooter, elevator);
+    return choose.getSelected();
   }
   
 }
