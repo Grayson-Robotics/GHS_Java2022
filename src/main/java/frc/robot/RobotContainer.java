@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.commands.*;
 import frc.robot.subclasses.JoystickAxis;
 import frc.robot.subsystems.*;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -33,7 +34,7 @@ public class RobotContainer {
   private final Elevator elevator = new Elevator();
   private final ArmMove arm = new ArmMove();
   private final Collector collect = new Collector();
-
+  
   final Joystick m_stick = new Joystick(0);
   final XboxController m_stick2 = new XboxController(1);
 
@@ -91,7 +92,7 @@ public class RobotContainer {
 
     configureButtonBindings();
     
-    driveTrain.setDefaultCommand(new driveCommand(driveTrain , () ->  -(m_stick.getY()), () -> (m_stick.getRawAxis(4))));
+    driveTrain.setDefaultCommand(new driveCommand(driveTrain , () -> 0.85 * -(m_stick.getY()), () -> 0.85 *(m_stick.getRawAxis(4))));
   }
 
   /**
@@ -133,8 +134,11 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
- /* public Command getAutonomousCommand() {
+  
+   
+   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_autoCommand;
-  }*/
+    return new driveAuto(driveTrain, shooter, elevator);
+  }
+  
 }
