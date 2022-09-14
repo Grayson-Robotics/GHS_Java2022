@@ -45,7 +45,7 @@ public class RobotContainer {
   private ShuffleboardTab driveTab = Shuffleboard.getTab("drive");
   private NetworkTableEntry maxSpeed = driveTab.add("Max Speed", 1).withWidget(BuiltInWidgets.kNumberSlider).withProperties(Map.of("min", 0, "max", 1)).getEntry();
   
-  private double speed = maxSpeed.getDouble(1.0);
+  private double speed = maxSpeed.getDouble(0.75);
 
   private SendableChooser<Command> choose = new SendableChooser<>();
   
@@ -71,7 +71,7 @@ public class RobotContainer {
 
     configureButtonBindings();
     
-    driveTrain.setDefaultCommand(new driveCommand(driveTrain , () -> speed * -(m_stick.getY()), () -> speed *(m_stick.getRawAxis(4))));
+    driveTrain.setDefaultCommand(new driveCommand(driveTrain , () -> 0.65 * -(m_stick.getY()), () -> 0.65 *(m_stick.getRawAxis(4))));
   }
 
   /**
@@ -85,8 +85,10 @@ public class RobotContainer {
     final JoystickButton B = new JoystickButton(m_stick2, 2);
     final JoystickButton X = new JoystickButton(m_stick2, 3);
     final JoystickButton Y = new JoystickButton(m_stick2 ,4);
-    final JoystickButton L1 = new JoystickButton(m_stick2, 5);
-    final JoystickButton R1 = new JoystickButton(m_stick2, 6);
+    final JoystickButton L1 = new JoystickButton(m_stick, 5);
+    final JoystickButton R1 = new JoystickButton(m_stick, 6);
+    final JoystickButton d2L1 = new JoystickButton(m_stick2, 5);
+    final JoystickButton d2R1 = new JoystickButton(m_stick2, 6);
     final JoystickAxis L2 = new JoystickAxis(m_stick2, 2);
     final JoystickAxis R2 = new JoystickAxis(m_stick2, 3);
     final POVButton upAngle = new POVButton(m_stick2, 0); 
@@ -99,9 +101,13 @@ public class RobotContainer {
     Y.whenHeld(new sendClimbArmUp(climber));
     L1.whenHeld(new armUp(arm));
     R1.whenHeld(new armDown(arm));
+    
+    d2L1.whenHeld(new armUp(arm));
+    d2R1.whenHeld(new armDown(arm));
+    
     L2.whenHeld(new runGrabber(collect));
     R2.whenHeld(new startShoot(shooter), true);
-    upAngle.whenHeld(new elevatorUp(elevator));
+    upAngle.whenHeld(new grabElevate(elevator, collect));
     downAngle.whenHeld(new elevatorDown(elevator));
   }
   

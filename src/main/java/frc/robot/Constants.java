@@ -20,16 +20,17 @@ public final class Constants {
     public final class driveMotors{
         public static final int m_topLeft = 5;
         public static final int m_bottomLeft = 2;
-    
+        
         public static final int m_topRight = 1;
-        public static final int m_bottomRight = 4;
+        public static final int m_bottomRight = 6;
+        
         public static final int m_climber = 0;
     }
     public final class utilMotors{
         public static final int m_shooter = 3; 
         public static final int m_elevator = 8;   
         public static final int m_arm = 7;
-        public static final int m_grabber = 6;
+        public static final int m_grabber = 4;
     }
 
     // This holds what channel certain solenoids are on.

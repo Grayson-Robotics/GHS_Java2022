@@ -42,12 +42,12 @@ public class driveAuto extends CommandBase {
     if(time.get() > 0 && time.get() < 1){
       shoot_motor.set(1);
     }
-    if(time.get() > 1 && time.get() < 3){
+    if(time.get() > 1 && time.get() < 7){
       shoot_motor.set(1);
       levitate.bringUp();
     }
-    if(time.get() > 3 && time.get() < 5){
-      drive.drive(-0.9, 0);
+    if(time.get() > 7 && time.get() < 10){
+      drive.drive(-0.8, 0);
       shoot_motor.set(0);
       levitate.set(0);
       
@@ -68,6 +68,6 @@ public class driveAuto extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return time.get() > 5;
+    return time.get() > 10;
   }
 }
